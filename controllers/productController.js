@@ -3,6 +3,7 @@ const Product = require('../models/Product');
 exports.addProduct = async (req, res) => {
   try {
     const product = new Product(req.body);
+    if (!product) return res.status(400).json({ msg: 'Invalid product data' });
     await product.save();
     res.status(201).json(product);
   } catch (err) {
